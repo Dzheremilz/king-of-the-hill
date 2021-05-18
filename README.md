@@ -1,4 +1,4 @@
-<h1 align="center"><b>WORK IN PROGRESS<b><h1>
+<h1 align="center"><b>WORK IN PROGRESS</b></h1>
 
 # Getting Started with Create React App
 

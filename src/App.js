@@ -19,8 +19,8 @@ function App() {
             <Connect account={account} setAccount={setAccount} />
           </div>
           <div className="col-6">
-            <h1>TEST CONTRACT</h1>
-            <Ether account={account}/>
+            <h1>TEST CONTRACT (on rinkeby)</h1>
+            <Ether account={account} />
           </div>
         </div>
       </div>

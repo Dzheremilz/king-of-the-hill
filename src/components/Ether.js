@@ -116,17 +116,17 @@ const Ether = ({ account }) => {
     <div className="App">
       <header className="App-header">
         <div>
-          <button onClick={fetchPot}>Pot</button>
-          <button onClick={fetchPot2}>Pot2</button>
-          <button onClick={fetchPotOwner}>Pot Owner</button>
-          <button onClick={fetchOwner}>Owner</button>
+          <button type="button" className="btn btn-info m-1" onClick={fetchPot}>Pot</button>
+          <button type="button" className="btn btn-info m-1" onClick={fetchPot2}>Pot2</button>
+          <button type="button" className="btn btn-info m-1" onClick={fetchPotOwner}>Pot Owner</button>
+          <button type="button" className="btn btn-info m-1" onClick={fetchOwner}>Owner</button>
         </div>
         <div>
-          <button onClick={fetchBlockNumber}>Block Number</button>
-          <button onClick={fetchBlockNumberToWin}>Block Number to win</button>
+          <button type="button" className="btn btn-info m-1" onClick={fetchBlockNumber}>Block Number</button>
+          <button type="button" className="btn btn-info m-1" onClick={fetchBlockNumberToWin}>Block Number to win</button>
         </div>
         <div>
-          <button onClick={sendPotOffering}>Pot Offering</button>
+          <button type="button" className="btn btn-danger m-1" onClick={sendPotOffering}>Pot Offering</button>
         </div>
       </header>
     </div>

@@ -6,16 +6,18 @@ import KingOfTheHill from '../KingOfTheHill.json';
 // Update with the contract address logged out to the CLI when it was deployed 
 const contractAddress = "0x756d9B42A54F6a18254C439B86651C6071377FDc"
 
-const Ether = () => {
+const Ether = ({ account }) => {
   // store greeting in local state
   //const [greeting, setGreetingValue] = useState()
 
   // request access to the user's MetaMask account
+
   /*
   async function requestAccount() {
-    console.log(await window.ethereum.request({ method: 'eth_requestAccounts' }))
+    await window.ethereum.request({ method: 'eth_requestAccounts' })
   }
   */
+
 
   // call the smart contract, read the current greeting value
   /*
@@ -53,6 +55,7 @@ const Ether = () => {
       try {
         const data = await contract.pot2()
         console.log(parseInt(data._hex, 16))
+        return parseInt(data._hex, 16)
       } catch (err) {
         console.log("Error: ", err)
       }
@@ -127,6 +130,30 @@ const Ether = () => {
   }
   */
 
+  async function sendPotOffering() {
+    const pot2 = await fetchPot2()
+    const value = pot2.toString(16)
+    if (account !== '0x0') {
+      ; (async () => {
+        try {
+          const transaction = await window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [
+              {
+                from: account,
+                to: contractAddress,
+                value: value,
+              },
+            ],
+          })
+          console.log(transaction)
+        } catch (e) {
+          alert(e.message)
+        }
+      })()
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -142,6 +169,9 @@ const Ether = () => {
         <div>
           <button onClick={fetchBlockNumber}>Block Number</button>
           <button onClick={fetchBlockNumberToWin}>Block Number to win</button>
+        </div>
+        <div>
+          <button onClick={sendPotOffering}>Pot Offering</button>
         </div>
       </header>
     </div>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 
-const Connect = () => {
+const Connect = ({ account, setAccount }) => {
   const [isConnect, setIsConnect] = useState(JSON.parse(localStorage.getItem('isConnect')) || false)
-  const [account, setAccount] = useState('0x0')
   const [network, setNetwork] = useState(null)
   const [balance, setBalance] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -26,7 +25,7 @@ const Connect = () => {
         }
       })()
     }
-  }, [isConnect])
+  }, [isConnect, setAccount])
 
   useEffect(() => {
     if (account !== '0x0') {
@@ -55,7 +54,12 @@ const Connect = () => {
     window.ethereum.on('chainChanged', (chainId) => {
       window.location.reload();
     });
-  }, [account, network])
+    window.ethereum.on('disconnect', (accounts) => {
+      // currently not working
+      setIsConnect(false)
+      setAccount('0x0');
+    });
+  }, [account, network, setAccount])
 
   const handleButtonClick = () => {
     setIsConnect(isConnect => !isConnect)

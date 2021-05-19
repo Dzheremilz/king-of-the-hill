@@ -69,7 +69,6 @@ const Ether = ({ account }) => {
       try {
         const data = await contract.potOwner()
         console.log(data)
-        return data
       } catch (err) {
         console.log("Error: ", err)
       }
@@ -132,31 +131,26 @@ const Ether = ({ account }) => {
   */
 
   async function sendPotOffering() {
-    if (JSON.parse(localStorage.getItem('isConnect')) === true) {
-      if (account !== '0x0') {
-        // todo : check is account !== sender
-        const pot2 = await fetchPot2()
-        const value = pot2.toString(16)
-          ; (async () => {
-            try {
-              const transaction = await window.ethereum.request({
-                method: 'eth_sendTransaction',
-                params: [
-                  {
-                    from: account,
-                    to: contractAddress,
-                    value: value,
-                  },
-                ],
-              })
-              console.log(transaction)
-            } catch (e) {
-              alert(e.message)
-            }
-          })()
-      }
-    } else {
-      alert('You need to connect a wallet to send ether')
+    if (account !== '0x0') {
+      const pot2 = await fetchPot2()
+      const value = pot2.toString(16)
+        ; (async () => {
+          try {
+            const transaction = await window.ethereum.request({
+              method: 'eth_sendTransaction',
+              params: [
+                {
+                  from: account,
+                  to: contractAddress,
+                  value: value,
+                },
+              ],
+            })
+            console.log(transaction)
+          } catch (e) {
+            alert(e.message)
+          }
+        })()
     }
   }
 
